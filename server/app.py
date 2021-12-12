@@ -40,7 +40,7 @@ def register():
     email = request.form.get("email")
     password = request.form.get("password")
 
-    pw_hash = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
+    pw_hash = hash(password)
 
     userObject = {
         "name": name, 

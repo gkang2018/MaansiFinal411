@@ -46,10 +46,8 @@ const Dashboard = (
     const searchForApartments = async () => {
         try {
             if (city !== "" && state !=="") {
-                // const apartments = await findApartments(city, state);
-                // console.log(apartments)
-                // setData(apartments);
-                setData(fakeData)
+                const apartments = await findApartments(city, state);
+                setData(apartments);
             }
             else {
                 handleShowMessage("Please fill out both city and state", "error")
@@ -80,12 +78,21 @@ const Dashboard = (
         setShowDetailView(false);
     }
 
-    useEffect(() => {
-        if (!checkAuthStatus()) {
-            handleShowMessage("Please login again as your session has expired", 'error')
-            navigate("/login")
+    const checkAuth = async () => {
+        try {
+            const auth = await checkAuthStatus();
+            if (!auth) {
+                handleShowMessage("Please login again as your session has expired", 'error')
+                navigate("/login")
+            }
+            setValidated(true);
+        } catch (error) {
+            console.log(error);
         }
-        setValidated(true);
+    }
+
+    useEffect(() => {
+        checkAuth();
     }, [])
 
     return (

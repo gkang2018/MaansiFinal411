@@ -37,11 +37,12 @@ function App() {
     let isLoggedIn = false;
     try {
       isLoggedIn = await checkIsLoggedIn();
+      setIsLoggedIn(isLoggedIn);
+      return isLoggedIn;
     } catch (error) {
       console.log(error);
+      return false;
     }
-    setIsLoggedIn(isLoggedIn);
-    return isLoggedIn;
   }
 
   return (
@@ -59,11 +60,10 @@ function App() {
             {message}
         </Alert>}
         <Routes>
-          <Route exact path="/" element={<Homepage />} />
-          <Route exact path="/signup" element={<Signup handleShowMessage={handleShowMessage} handleClearMessage={handleClearMessage} />} />
-          <Route exact path="/login" element={<Login handleShowMessage={handleShowMessage} handleClearMessage={handleClearMessage} />} />
+          <Route exact path="/" element={<Homepage checkAuthStatus={checkAuthStatus}/>} />
+          <Route exact path="/signup" element={<Signup handleShowMessage={handleShowMessage} handleClearMessage={handleClearMessage} checkAuthStatus={checkAuthStatus} />} />
+          <Route exact path="/login" element={<Login handleShowMessage={handleShowMessage} handleClearMessage={handleClearMessage} checkAuthStatus={checkAuthStatus} />} />
           <Route exact path="/dashboard" element={<Dashboard handleShowMessage={handleShowMessage} handleClearMessage={handleClearMessage} checkAuthStatus={checkAuthStatus}/>} />
-          <Route exact path="/detailed-view" element={<DetailedView handleShowMessage={handleShowMessage} handleClearMessage={handleClearMessage} checkAuthStatus={checkAuthStatus}/>} />
       </Routes>
     </Router>
     </div>
