@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { useNavigate } from 'react-router';
-
+import "./index.css"
 
 const Homepage = ({
     checkAuthStatus
@@ -24,7 +24,9 @@ const Homepage = ({
     }, [])
 
     return (
-        <h1>Welcome to my homepage</h1>
+        <div className="background-container container">
+            
+        </div>
     )
 }
 

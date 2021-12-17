@@ -1,0 +1,7 @@
+.background-container {
+    background-image: url("../../new-background.jpeg");
+    background-size: cover;
+    position:fixed;
+    height: 100%;
+    width: 100%;
+}
